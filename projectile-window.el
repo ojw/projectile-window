@@ -35,7 +35,7 @@
 (defvar projectile-window-on nil
   "Is projectile-window-mode on?")
 
-(defun projectile-window-save-layout () ;  (project)
+(defun projectile-window-save-layout ()
   "Save the current window layout to the layout map for project."
   (interactive)
   (ht-set! projectile-window-layouts projectile-window-project (current-window-configuration))
@@ -46,11 +46,7 @@
   (interactive)
   (let* ((layout (ht-get projectile-window-layouts (projectile-project-name))))
     (if layout
-        (set-window-configuration layout)
-      ;(funcall projectile-switch-project-action)
-      )))
-
-;; (setq projectile-switch-project-action #'projectile-window-restore-layout)
+        (set-window-configuration layout))))
 
 (define-minor-mode projectile-window-mode
   "Automatically save and restore projectile project window states."
@@ -69,8 +65,6 @@
       (add-hook 'projectile-before-switch-project-hook
                 #'projectile-window-save-layout)
       (setq projectile-window-on t))))
-
-
 
 (provide 'projectile-window)
 ;;; projectile-window.el ends here
